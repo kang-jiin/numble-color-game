@@ -1,8 +1,9 @@
+import React from 'react';
 
 function App() {
   return (
     <div className="App">
-      TEST 코드입니당
+      TEST 코드입니다    
     </div>
   );
 }
