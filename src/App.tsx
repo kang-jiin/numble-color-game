@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import Board from './components/Board';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
+import Board from './components/Board';
 
 function App() {
   const [stage, setStage] = useState<number>(1);
@@ -8,9 +8,24 @@ function App() {
   const [score, setScore] = useState<number>(0);
   const onClickAnswer = () => {
     setStage(stage + 1);
-    setTime(time + 5);
+    setTime(15);
     setScore(Math.pow(stage, 3) * time);
   }
+
+  useEffect(() => {
+    const timeInterval = setTimeout(() => {
+      if (time > 0) {
+        setTime(time - 1);
+      } else {
+        alert("GAME OVER");
+        setStage(1);
+        setTime(15);
+        setScore(0);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeInterval);
+  }, [time]);
 
   return (
     <div className="App">
