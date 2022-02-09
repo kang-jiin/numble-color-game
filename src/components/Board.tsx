@@ -8,10 +8,18 @@ type BoardProps = {
     onClickBase: any;
 }
 
-    const [blockCount, setBlockCount] = useState<number>(Math.round((stage + 0.5) / 2) + 1);
-    const [blockTotalCount, setBlockTotalCount] = useState<number>(Math.pow(blockCount, 2));
-    const [blockSize, setBlockSize] = useState<number>(360/blockCount -4);
-    const [answer, setAnswer] = useState<number>(Math.floor(Math.random()*blockTotalCount));
+function Board({ stage, onClickAnswer, onClickBase }: BoardProps) {
+    const [blockCount, setBlockCount] = useState<number>(2);
+    const [blockTotalCount, setBlockTotalCount] = useState<number>(4);
+    const [blockSize, setBlockSize] = useState<number>(176);
+    const [answer, setAnswer] = useState<number>(Math.floor(Math.random() * blockTotalCount));
+
+    useEffect(() => {
+        setBlockCount(Math.round((stage + 0.5) / 2) + 1);
+        setBlockTotalCount(Math.pow(blockCount, 2));
+        setBlockSize(360 / blockCount - 4);
+        setAnswer(Math.floor(Math.random() * blockTotalCount));
+    }, [stage]);
 
     return (
         <div style={{ maxWidth: '360px', display: 'flex', flexWrap: 'wrap' }}>
