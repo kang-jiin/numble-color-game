@@ -11,6 +11,9 @@ function App() {
     setTime(15);
     setScore(Math.pow(stage, 3) * time);
   }
+  const onClickBase = () => {
+    setTime(time - 3);
+  }
 
   useEffect(() => {
     const timeInterval = setTimeout(() => {
@@ -30,7 +33,7 @@ function App() {
   return (
     <div className="App">
       <Header stage={stage} time={time} score={score} />
-      <Board stage={stage} onClickAnswer={onClickAnswer} />
+      <Board stage={stage} onClickAnswer={onClickAnswer} onClickBase={onClickBase} />
     </div>
   );
 }

@@ -2,9 +2,10 @@ import React from 'react';
 
 type BaseBlockProps = {
     size: number;
+    onClickBase: any;
 }
 
-function BaseBlock({ size }: BaseBlockProps) {
+function BaseBlock({ size, onClickBase }: BaseBlockProps) {
 
     return (
         <div 
@@ -14,6 +15,7 @@ function BaseBlock({ size }: BaseBlockProps) {
             backgroundColor: 'rgb(136, 34, 224)',
             margin: '2px'
         }}
+        onClick={onClickBase}
         >
         </div>
     );
