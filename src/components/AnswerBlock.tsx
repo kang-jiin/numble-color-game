@@ -2,16 +2,17 @@ import React from 'react';
 
 type AnswerBlockProps = {
     size: number;
-    onClickAnswer: any;
+    color: string;
+    onClickAnswer: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-function AnswerBlock({ size, onClickAnswer }: AnswerBlockProps) {
+function AnswerBlock({ size, color, onClickAnswer }: AnswerBlockProps) {
     return (
         <div 
         style={{
             width: size, 
             height: size, 
-            backgroundColor: 'rgb(0, 0, 0)',
+            backgroundColor: color,
             margin: '2px'
         }}
         onClick={onClickAnswer}

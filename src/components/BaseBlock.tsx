@@ -2,17 +2,17 @@ import React from 'react';
 
 type BaseBlockProps = {
     size: number;
-    onClickBase: any;
+    color: string;
+    onClickBase: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
-function BaseBlock({ size, onClickBase }: BaseBlockProps) {
-
+function BaseBlock({ size, color, onClickBase }: BaseBlockProps) {
     return (
         <div 
         style={{
             width: size, 
             height: size, 
-            backgroundColor: 'rgb(136, 34, 224)',
+            backgroundColor: color,
             margin: '2px'
         }}
         onClick={onClickBase}
