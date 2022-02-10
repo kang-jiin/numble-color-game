@@ -12,18 +12,24 @@ function App() {
     setScore(Math.pow(stage, 3) * time);
   }
   const onClickBase = () => {
-    setTime(time - 3);
+    if (time < 3) {
+      setTime(0);
+    } else {
+      setTime(time - 3);
+    }
   }
 
   useEffect(() => {
+    if (time <= 0) {
+      alert(`GAME OVER!\n스테이지: ${stage}, 점수: ${score}`);
+      setStage(1);
+      setTime(15);
+      setScore(0);
+    }
+
     const timeInterval = setTimeout(() => {
       if (time > 0) {
         setTime(time - 1);
-      } else {
-        alert("GAME OVER");
-        setStage(1);
-        setTime(15);
-        setScore(0);
       }
     }, 1000);
 
