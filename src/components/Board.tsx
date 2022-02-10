@@ -16,10 +16,16 @@ function Board({ stage, onClickAnswer, onClickBase }: BoardProps) {
 
     useEffect(() => {
         setBlockCount(Math.round((stage + 0.5) / 2) + 1);
+    }, [stage]);
+
+    useEffect(() => {
         setBlockTotalCount(Math.pow(blockCount, 2));
         setBlockSize(360 / blockCount - 4);
+    }, [blockCount]);
+
+    useEffect(() => {
         setAnswer(Math.floor(Math.random() * blockTotalCount));
-    }, [stage]);
+    }, [stage, blockTotalCount]);
 
     return (
         <div style={{ maxWidth: '360px', display: 'flex', flexWrap: 'wrap' }}>
