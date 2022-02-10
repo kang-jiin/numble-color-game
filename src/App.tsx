@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Header from './components/Header';
-import Board from './components/Board';
+import Header from 'components/Header';
+import Board from 'components/Board';
 
 function App() {
   const [stage, setStage] = useState<number>(1);
