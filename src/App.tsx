@@ -9,7 +9,7 @@ function App() {
   const onClickAnswer = () => {
     setStage(stage + 1);
     setTime(15);
-    setScore(Math.pow(stage, 3) * time);
+    setScore(score + Math.pow(stage, 3) * time);
   }
   const onClickBase = () => {
     if (time < 3) {
