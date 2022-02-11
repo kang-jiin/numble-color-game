@@ -8,21 +8,17 @@ type AnswerBlockProps = {
 
 function AnswerBlock({ size, color, onClickAnswer }: AnswerBlockProps) {
     return (
-        <div 
-        style={{
-            width: size, 
-            height: size, 
-            backgroundColor: color,
-            margin: '2px'
-        }}
-        onClick={onClickAnswer}
+        <div
+            style={{
+                width: size,
+                height: size,
+                backgroundColor: color,
+                margin: '2px'
+            }}
+            onClick={onClickAnswer}
         >
         </div>
     );
-}
-
-AnswerBlock.defaultProps = {
-    
 }
 
 export default AnswerBlock;

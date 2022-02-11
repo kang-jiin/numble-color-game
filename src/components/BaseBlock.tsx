@@ -8,21 +8,17 @@ type BaseBlockProps = {
 
 function BaseBlock({ size, color, onClickBase }: BaseBlockProps) {
     return (
-        <div 
-        style={{
-            width: size, 
-            height: size, 
-            backgroundColor: color,
-            margin: '2px'
-        }}
-        onClick={onClickBase}
+        <div
+            style={{
+                width: size,
+                height: size,
+                backgroundColor: color,
+                margin: '2px'
+            }}
+            onClick={onClickBase}
         >
         </div>
     );
-}
-
-BaseBlock.defaultProps = {
-    
 }
 
 export default BaseBlock;
