@@ -31,8 +31,11 @@ function Board({ stage, onClickAnswer, onClickBase }: BoardProps) {
         let randomR = Math.floor(Math.random() * 256);
         let randomG = Math.floor(Math.random() * 256);
         let randomB = Math.floor(Math.random() * 256);
-        setAnswerColor(`rgb(${randomR}, ${randomG}, ${randomB})`);
-        setBaseColor(`rgb(${randomR-(40-stage)}, ${randomG-(40-stage)}, ${randomB-(40-stage)})`);
+        let answerR = randomR < 128 ? randomR + (40 - stage) : randomR - (40 - stage);
+        let answerG = randomG < 128 ? randomG + (40 - stage) : randomG - (40 - stage);
+        let answerB = randomB < 128 ? randomB + (40 - stage) : randomB - (40 - stage);
+        setBaseColor(`rgb(${randomR}, ${randomG}, ${randomB})`);
+        setAnswerColor(`rgb(${answerR}, ${answerG}, ${answerB})`);
     }, [stage, blockTotalCount]);
 
     return (
