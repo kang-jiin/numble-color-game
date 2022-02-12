@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from 'components/Header';
 import Board from 'components/Board';
 
@@ -6,18 +6,19 @@ function App() {
   const [stage, setStage] = useState<number>(1);
   const [time, setTime] = useState<number>(15);
   const [score, setScore] = useState<number>(0);
-  const onClickAnswer = () => {
+  
+  const onClickAnswer = useCallback(() => {
     setStage(stage + 1);
     setTime(15);
     setScore(score + Math.pow(stage, 3) * time);
-  }
-  const onClickBase = () => {
+  }, [stage, time, score]);
+  const onClickBase = useCallback(() => {
     if (time < 3) {
       setTime(0);
     } else {
       setTime(time - 3);
     }
-  }
+  }, [time]);
 
   useEffect(() => {
     if (time <= 0) {
