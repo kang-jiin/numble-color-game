@@ -4,42 +4,30 @@ import BaseBlock from './BaseBlock';
 
 type BoardProps = {
     stage: number;
-    onClickAnswer: any;
-    onClickBase: any;
+    onClickAnswer: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    onClickBase: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    maxWidth?: number;
 }
 
-function Board({ stage, onClickAnswer, onClickBase }: BoardProps) {
-    const [blockCount, setBlockCount] = useState<number>(2);
-    const [blockTotalCount, setBlockTotalCount] = useState<number>(4);
-    const [blockSize, setBlockSize] = useState<number>(176);
-    const [answer, setAnswer] = useState<number>(Math.floor(Math.random() * blockTotalCount));
-    const [answerColor, setAnswerColor] = useState<string>('');
-    const [baseColor, setBaseColor] = useState<string>('');
+function Board({ stage, onClickAnswer, onClickBase, maxWidth }: BoardProps) {
+    const randomColors  = () => {
+        let baseR = Math.floor(Math.random() * 256);
+        let baseG = Math.floor(Math.random() * 256);
+        let baseB = Math.floor(Math.random() * 256);
+        let answerR = baseR < 128 ? baseR + (40 - stage) : baseR - (40 - stage);
+        let answerG = baseG < 128 ? baseG + (40 - stage) : baseG - (40 - stage);
+        let answerB = baseB < 128 ? baseB + (40 - stage) : baseB - (40 - stage);
+        return [`rgb(${baseR}, ${baseG}, ${baseB})`, `rgb(${answerR}, ${answerG}, ${answerB})`];
+    }
 
-    useEffect(() => {
-        setBlockCount(Math.round((stage + 0.5) / 2) + 1);
-    }, [stage]);
-
-    useEffect(() => {
-        setBlockTotalCount(Math.pow(blockCount, 2));
-        setBlockSize(360 / blockCount - 4);
-    }, [blockCount]);
-
-    useEffect(() => {
-        setAnswer(Math.floor(Math.random() * blockTotalCount));
-
-        let randomR = Math.floor(Math.random() * 256);
-        let randomG = Math.floor(Math.random() * 256);
-        let randomB = Math.floor(Math.random() * 256);
-        let answerR = randomR < 128 ? randomR + (40 - stage) : randomR - (40 - stage);
-        let answerG = randomG < 128 ? randomG + (40 - stage) : randomG - (40 - stage);
-        let answerB = randomB < 128 ? randomB + (40 - stage) : randomB - (40 - stage);
-        setBaseColor(`rgb(${randomR}, ${randomG}, ${randomB})`);
-        setAnswerColor(`rgb(${answerR}, ${answerG}, ${answerB})`);
-    }, [stage, blockTotalCount]);
-
+    const blockCount = useMemo(() => Math.round((stage + 0.5) / 2) + 1, [stage]);
+    const blockTotalCount = useMemo(() => Math.pow(blockCount, 2), [blockCount]);
+    const blockSize = useMemo(() => maxWidth / blockCount - 4, [blockCount]);
+    const answer = useMemo(() => Math.floor(Math.random() * blockTotalCount), [stage]);
+    const [answerColor, baseColor] = useMemo(() => randomColors(), [stage]);
+    
     return (
-        <div style={{ maxWidth: '360px', display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{ maxWidth: `${maxWidth}px`, display: 'flex', flexWrap: 'wrap' }}>
             {Array.from(Array(blockTotalCount), (e, index) => {
                 return index === answer
                     ?
@@ -52,7 +40,7 @@ function Board({ stage, onClickAnswer, onClickBase }: BoardProps) {
 }
 
 Board.defaultProps = {
-
+    maxWidth: 360
 }
 
 export default Board;
