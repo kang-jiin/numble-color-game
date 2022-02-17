@@ -28,13 +28,13 @@ function App() {
       setScore(0);
     }
 
-    const timeInterval = setTimeout(() => {
+    const timer = setTimeout(() => {
       if (time > 0) {
         setTime(time - 1);
       }
     }, 1000);
 
-    return () => clearTimeout(timeInterval);
+    return () => clearTimeout(timer);
   }, [time]);
 
   return (
